@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Franck Emmanuel Daouda Bleoue — Développeur Front-End &amp; Data</title>
+<meta name="description" content="Portfolio de Franck Emmanuel Daouda Bleoue — Développeur front-end orienté data, IA et optimisation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E14;
+    --surface:#12182A;
+    --surface-2:#1A2238;
+    --line:#242C42;
+    --amber:#F2B705;
+    --amber-dim:#8a6b0d;
+    --teal:#4FD1C5;
+    --text:#EDEFF4;
+    --muted:#8891A5;
+    --muted-2:#5C6580;
+    --radius:14px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:.18;
+    pointer-events:none;
+    z-index:0;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 90%);
+  }
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit;}
+  .wrap{max-width:1080px; margin:0 auto; padding:0 28px; position:relative; z-index:1;}
+  section{padding:110px 0;}
+  @media (max-width:720px){ section{padding:72px 0;} }
+
+  /* ---- nav ---- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(10,14,20,.72);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:16px; padding-bottom:16px;}
+  .brand{font-family:'Space Grotesk'; font-weight:700; font-size:1rem; display:flex; align-items:center; gap:8px;}
+  .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--amber); box-shadow:0 0 10px var(--amber);}
+  nav ul{list-style:none; display:flex; gap:28px;}
+  nav a{font-size:.86rem; color:var(--muted); text-decoration:none; transition:color .2s;}
+  nav a:hover{color:var(--text);}
+  .nav-cta{
+    font-family:'JetBrains Mono'; font-size:.78rem; padding:8px 16px; border:1px solid var(--amber-dim);
+    border-radius:8px; color:var(--amber); text-decoration:none; white-space:nowrap;
+  }
+  .nav-links{display:flex; gap:26px;}
+  @media (max-width:720px){ .nav-links{display:none;} }
+
+  /* ---- hero ---- */
+  .hero{padding-top:180px; padding-bottom:100px; position:relative;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center;}
+  @media (max-width:860px){ .hero-grid{grid-template-columns:1fr;} .hero{padding-top:140px;} }
+  .eyebrow{
+    font-family:'JetBrains Mono'; font-size:.78rem; color:var(--teal);
+    display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--teal);}
+  .hero h1{font-size:clamp(2.4rem, 5vw, 3.6rem); line-height:1.05; margin-bottom:22px;}
+  .hero h1 span{color:var(--amber);}
+  .hero p.lead{color:var(--muted); font-size:1.08rem; max-width:46ch; margin-bottom:34px;}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    font-family:'JetBrains Mono'; font-size:.82rem; padding:13px 22px; border-radius:10px;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:transform .15s, background .2s;
+  }
+  .btn-primary{background:var(--amber); color:#161200; font-weight:600;}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-ghost{border:1px solid var(--line); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--muted-2); transform:translateY(-2px);}
+
+  /* ---- NFC card signature ---- */
+  .card-stage{perspective:1200px; display:flex; justify-content:center;}
+  .nfc-card{
+    width:320px; aspect-ratio:1.586/1; border-radius:20px; position:relative;
+    background:linear-gradient(155deg, #1A2238 0%, #0F1422 60%, #0A0E14 100%);
+    border:1px solid var(--line);
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.6);
+    transform:rotateX(8deg) rotateY(-14deg);
+    transition:transform .25s ease;
+    padding:26px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    overflow:hidden;
+  }
+  .nfc-card::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(120deg, transparent 30%, rgba(242,183,5,.14) 45%, transparent 60%);
+    transform:translateX(-120%);
+    transition:transform .8s ease;
+  }
+  .card-stage:hover .nfc-card{transform:rotateX(2deg) rotateY(-2deg) scale(1.02);}
+  .card-stage:hover .nfc-card::after{transform:translateX(120%);}
+  .nfc-top{display:flex; justify-content:space-between; align-items:flex-start;}
+  .nfc-chip{width:38px; height:28px; border-radius:6px; background:linear-gradient(135deg,#3a3220,var(--amber)); opacity:.85;}
+  .nfc-wave{display:flex; gap:3px; align-items:flex-end;}
+  .nfc-wave span{display:block; width:3px; background:var(--teal); border-radius:2px; opacity:.8;}
+  .nfc-wave span:nth-child(1){height:8px;} .nfc-wave span:nth-child(2){height:14px;}
+  .nfc-wave span:nth-child(3){height:20px;} .nfc-wave span:nth-child(4){height:14px;} .nfc-wave span:nth-child(5){height:8px;}
+  .nfc-name{font-family:'Space Grotesk'; font-size:1.3rem; font-weight:600;}
+  .nfc-role{font-family:'JetBrains Mono'; font-size:.68rem; color:var(--muted); margin-top:4px; letter-spacing:.04em;}
+  .nfc-tap{font-family:'JetBrains Mono'; font-size:.66rem; color:var(--amber); margin-top:18px; letter-spacing:.05em;}
+  .card-caption{text-align:center; font-family:'JetBrains Mono'; font-size:.74rem; color:var(--muted-2); margin-top:26px;}
+
+  /* ---- section headers ---- */
+  .section-head{margin-bottom:48px;}
+  .section-num{font-family:'JetBrains Mono'; font-size:.78rem; color:var(--teal); margin-bottom:10px; display:block;}
+  .section-head h2{font-size:clamp(1.6rem,3vw,2.1rem);}
+  .section-head p{color:var(--muted); max-width:60ch; margin-top:12px;}
+
+  /* ---- about ---- */
+  .about-grid{display:grid; grid-template-columns:.85fr 1.15fr; gap:60px;}
+  @media (max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+  .about-photo{
+    border-radius:var(--radius); overflow:hidden; border:1px solid var(--line);
+    aspect-ratio:4/5; position:relative;
+  }
+  .about-photo img{width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(.15) contrast(1.05);}
+  .about-photo::after{content:""; position:absolute; inset:0; box-shadow:inset 0 -60px 60px -20px rgba(0,0,0,.5);}
+  .about-text p{color:var(--muted); margin-bottom:18px;}
+  .about-text strong{color:var(--text); font-weight:600;}
+  .stat-row{display:flex; gap:36px; margin-top:32px; flex-wrap:wrap;}
+  .stat b{font-family:'Space Grotesk'; font-size:1.6rem; color:var(--amber); display:block;}
+  .stat span{font-family:'JetBrains Mono'; font-size:.7rem; color:var(--muted-2);}
+
+  /* ---- skills ---- */
+  .skill-cols{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  @media (max-width:760px){ .skill-cols{grid-template-columns:1fr;} }
+  .skill-card{background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:26px;}
+  .skill-card h3{font-size:1rem; margin-bottom:6px;}
+  .skill-card .tag-line{font-family:'JetBrains Mono'; font-size:.7rem; color:var(--teal); margin-bottom:18px; display:block;}
+  .tags{display:flex; flex-wrap:wrap; gap:8px;}
+  .tag{font-family:'JetBrains Mono'; font-size:.72rem; padding:6px 11px; border-radius:6px; background:var(--surface-2); color:var(--muted); border:1px solid var(--line);}
+
+  /* ---- projects ---- */
+  .proj{
+    display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden; margin-bottom:28px; background:var(--surface);
+  }
+  .proj:nth-child(even) .proj-visual{order:2;}
+  @media (max-width:800px){ .proj{grid-template-columns:1fr;} .proj:nth-child(even) .proj-visual{order:0;} }
+  .proj-body{padding:34px;}
+  .proj-tagrow{display:flex; align-items:center; gap:10px; margin-bottom:14px; flex-wrap:wrap;}
+  .badge{font-family:'JetBrains Mono'; font-size:.66rem; padding:4px 10px; border-radius:20px; letter-spacing:.03em;}
+  .badge-live{background:rgba(79,209,197,.12); color:var(--teal); border:1px solid rgba(79,209,197,.3);}
+  .badge-conf{background:rgba(242,183,5,.1); color:var(--amber); border:1px solid rgba(242,183,5,.3);}
+  .badge-academic{background:rgba(255,255,255,.06); color:var(--muted); border:1px solid var(--line);}
+  .proj-body h3{font-size:1.25rem; margin-bottom:10px;}
+  .proj-body p{color:var(--muted); font-size:.93rem; margin-bottom:16px;}
+  .proj-meta{display:flex; gap:18px; flex-wrap:wrap; margin:16px 0 20px; font-family:'JetBrains Mono'; font-size:.72rem; color:var(--muted-2);}
+  .proj-meta b{color:var(--text); font-weight:500;}
+  .proj-links{display:flex; gap:14px;}
+  .proj-links a{font-family:'JetBrains Mono'; font-size:.76rem; color:var(--amber); text-decoration:none; display:inline-flex; align-items:center; gap:6px;}
+  .proj-links a:hover{text-decoration:underline;}
+  .proj-visual{
+    min-height:220px; display:flex; align-items:center; justify-content:center; padding:26px;
+    background:radial-gradient(ellipse at 30% 20%, rgba(242,183,5,.06), transparent 60%), var(--surface-2);
+    border-left:1px solid var(--line);
+  }
+  @media (max-width:800px){ .proj-visual{border-left:none; border-bottom:1px solid var(--line);} }
+
+  /* mock browser / dashboard visual */
+  .mock{width:100%; max-width:280px; border-radius:10px; overflow:hidden; border:1px solid var(--line); background:#0D1220;}
+  .mock-bar{display:flex; gap:5px; padding:9px 12px; background:#161C2E; border-bottom:1px solid var(--line);}
+  .mock-bar span{width:8px; height:8px; border-radius:50%; background:#2A324A;}
+  .mock-body{padding:14px;}
+  .mock-row{height:8px; border-radius:4px; background:#1E2740; margin-bottom:8px;}
+  .mock-row.w60{width:60%;} .mock-row.w80{width:80%;} .mock-row.w40{width:40%;}
+  .mock-chart{display:flex; align-items:flex-end; gap:4px; height:56px; margin:14px 0;}
+  .mock-chart div{flex:1; background:linear-gradient(180deg, var(--teal), transparent); opacity:.55; border-radius:3px 3px 0 0;}
+  .mock-cards{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
+  .mock-cards div{height:34px; border-radius:6px; background:#161C2E; border:1px solid var(--line);}
+
+  /* profile-hub visual for ConnectWord */
+  .hub{display:flex; flex-direction:column; align-items:center; gap:14px;}
+  .hub-avatar{width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg, var(--amber), var(--teal)); opacity:.85;}
+  .hub-links{display:flex; flex-direction:column; gap:8px; width:100%; max-width:220px;}
+  .hub-links div{height:30px; border-radius:8px; background:#161C2E; border:1px solid var(--line);}
+
+  /* ---- experience timeline ---- */
+  .timeline{border-left:1px solid var(--line); margin-left:8px; padding-left:36px; display:flex; flex-direction:column; gap:44px;}
+  .t-item{position:relative;}
+  .t-item::before{
+    content:""; position:absolute; left:-42px; top:4px; width:11px; height:11px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--amber);
+  }
+  .t-date{font-family:'JetBrains Mono'; font-size:.72rem; color:var(--teal); margin-bottom:6px; display:block;}
+  .t-item h3{font-size:1.05rem; margin-bottom:6px;}
+  .t-item p{color:var(--muted); font-size:.92rem; max-width:64ch;}
+
+  /* ---- certs ---- */
+  .cert-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px;}
+  @media (max-width:700px){ .cert-grid{grid-template-columns:1fr;} }
+  .cert{display:flex; align-items:center; gap:14px; padding:16px 18px; background:var(--surface); border:1px solid var(--line); border-radius:10px;}
+  .cert-icon{width:34px; height:34px; border-radius:8px; background:var(--surface-2); display:flex; align-items:center; justify-content:center; color:var(--amber); font-family:'JetBrains Mono'; font-size:.7rem; flex-shrink:0;}
+  .cert span{font-size:.88rem;}
+  .cert small{display:block; color:var(--muted-2); font-family:'JetBrains Mono'; font-size:.68rem; margin-top:2px;}
+
+  /* ---- footer / contact ---- */
+  footer{padding:100px 0 60px; text-align:center;}
+  footer h2{font-size:clamp(1.8rem,4vw,2.6rem); margin-bottom:20px;}
+  footer p{color:var(--muted); max-width:50ch; margin:0 auto 34px;}
+  .contact-row{display:flex; justify-content:center; gap:16px; flex-wrap:wrap; margin-bottom:60px;}
+  .foot-bottom{border-top:1px solid var(--line); padding-top:24px; font-family:'JetBrains Mono'; font-size:.72rem; color:var(--muted-2); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
+
+  ::selection{background:var(--amber); color:#161200;}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="dot"></span>FRANCK.DEV</div>
+    <ul class="nav-links">
+      <li><a href="#about">Profil</a></li>
+      <li><a href="#skills">Compétences</a></li>
+      <li><a href="#projects">Projets</a></li>
+      <li><a href="#experience">Parcours</a></li>
+    </ul>
+    <a class="nav-cta" href="assets/CV-Franck-Bleoue.pdf" target="_blank">↓ CV.pdf</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">DISPONIBLE POUR UN STAGE — DÉVELOPPEUR FRONT-END</span>
+      <h1>Je construis des interfaces<br>qui rendent la <span>donnée</span><br>lisible et l'<span>IA</span> utile.</h1>
+      <p class="lead">Franck Emmanuel Daouda Bleoue — étudiant en Big Data, IA &amp; Cloud Computing à Abidjan. Front-end par passion, data par formation : j'aime construire le pont entre les deux.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="assets/CV-Franck-Bleoue.pdf" target="_blank">Télécharger le CV</a>
+        <a class="btn btn-ghost" href="https://github.com/cresusrois-ship-it" target="_blank">Voir sur GitHub</a>
+        <a class="btn btn-ghost" href="#contact">Me contacter</a>
+      </div>
+    </div>
+    <div>
+      <div class="card-stage">
+        <div class="nfc-card">
+          <div class="nfc-top">
+            <div class="nfc-chip"></div>
+            <div class="nfc-wave"><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+          <div>
+            <div class="nfc-name">Franck Bleoue</div>
+            <div class="nfc-role">FRONT-END · DATA · CLOUD</div>
+            <div class="nfc-tap">◌ TAP TO CONNECT</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-caption">inspiré de Blackhand ConnectWord — mon produit NFC "un profil, toutes les connexions"</div>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="about-photo">
+      <img src="assets/franck.jpg" alt="Photo de Franck Emmanuel Daouda Bleoue">
+    </div>
+    <div class="about-text">
+      <span class="section-num">// PROFIL</span>
+      <h2 style="margin-bottom:22px;">De la donnée à l'interface</h2>
+      <p>Je suis étudiant en <strong>Licence Big Data, IoT &amp; Cloud Computing</strong> à TGMaster University (Abidjan), mais mes projets les plus aboutis sont nés côté écran : interfaces, produits, expérience utilisateur. J'aime autant nettoyer un jeu de données de 500 000 lignes que peaufiner une animation CSS.</p>
+      <p>Cette double casquette — <strong>rigueur data</strong> et <strong>sensibilité front-end</strong> — me permet de construire des interfaces qui ne se contentent pas d'être belles : elles restent lisibles, rapides et pensées pour l'optimisation, même quand le volume de données grossit.</p>
+      <p>J'ai une appétence particulière pour l'<strong>IA appliquée</strong>, l'<strong>optimisation</strong> et les architectures cloud — et je connecte aujourd'hui des IA à mes propres projets (ERP, CRM, ConnectWord) pour automatiser et accélérer le développement.</p>
+      <div class="stat-row">
+        <div class="stat"><b>500K+</b><span>LIGNES DE DONNÉES ANALYSÉES</span></div>
+        <div class="stat"><b>40%</b><span>TEMPS DE GESTION ÉCONOMISÉ (PROJET FOOT)</span></div>
+        <div class="stat"><b>3+</b><span>PROJETS PRODUITS EN PRODUCTION/RÉEL</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">// COMPÉTENCES</span>
+      <h2>Ce que je manie au quotidien</h2>
+      <p>Un socle front-end complété par une vraie compréhension data, cloud et IA — rare de ce côté du clavier.</p>
+    </div>
+    <div class="skill-cols">
+      <div class="skill-card">
+        <h3>Front-end &amp; produit</h3>
+        <span class="tag-line">// interfaces</span>
+        <div class="tags">
+          <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span>
+          <span class="tag">React</span><span class="tag">Angular</span><span class="tag">WordPress</span>
+          <span class="tag">UI Responsive</span><span class="tag">Git &amp; GitHub</span><span class="tag">Firebase</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Data &amp; Intelligence Artificielle</h3>
+        <span class="tag-line">// analyse</span>
+        <div class="tags">
+          <span class="tag">Python</span><span class="tag">Jupyter Notebook</span><span class="tag">EDA</span>
+          <span class="tag">Modélisation statistique</span><span class="tag">Visualisation de données</span><span class="tag">IA appliquée</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Cloud &amp; Infrastructure</h3>
+        <span class="tag-line">// systèmes</span>
+        <div class="tags">
+          <span class="tag">SQL Server</span><span class="tag">Architecture WAMP</span><span class="tag">Java</span>
+          <span class="tag">C</span><span class="tag">Sécurité de base</span><span class="tag">Cloud Computing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">// PROJETS</span>
+      <h2>Ce que j'ai construit</h2>
+      <p>Des projets académiques aux applications en production — certains sont publics, d'autres confidentiels par nature du client.</p>
+    </div>
+
+    <!-- ConnectWord -->
+    <div class="proj">
+      <div class="proj-body">
+        <div class="proj-tagrow">
+          <span class="badge badge-live">EN LIGNE</span>
+          <span class="badge badge-academic">PRODUIT PERSONNEL</span>
+        </div>
+        <h3>Blackhand ConnectWord</h3>
+        <p>Application liée à ma marque tech <strong>Blackhand</strong> (spécialisée NFC) : un profil unique qui centralise tous les liens d'une personne, accessible en un tap NFC ou via un lien. Pensée pour les clients qui achètent la technologie NFC et veulent tout regrouper sur une seule page. Le site vitrine de la marque, <strong>blackhandd.com</strong>, est développé sous WordPress.</p>
+        <div class="proj-meta">
+          <span><b>Rôle</b> · Conception &amp; développement</span>
+          <span><b>Stack</b> · React, Firebase · Vitrine en WordPress</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://blackhand-connectword67.web.app/" target="_blank">↗ Voir la démo</a>
+          <a href="https://blackhandd.com" target="_blank">↗ blackhandd.com</a>
+          <a href="https://github.com/cresusrois-ship-it" target="_blank">↗ GitHub</a>
+        </div>
+      </div>
+      <div class="proj-visual">
+        <div class="hub">
+          <div class="hub-avatar"></div>
+          <div class="hub-links"><div></div><div></div><div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Baanaa ERP -->
+    <div class="proj">
+      <div class="proj-body">
+        <div class="proj-tagrow">
+          <span class="badge badge-conf">CONFIDENTIEL — EN PRODUCTION</span>
+        </div>
+        <h3>ERP Baanaa (issu d'un CRM)</h3>
+        <p>Système ERP actuellement en production pour l'équipe Baanaa, conçu à partir d'un CRM que j'ai fait évoluer vers une gestion plus large de l'activité. Le projet étant en usage réel avec des données clients, je ne peux pas partager le code ni des captures réelles — la maquette ci-contre est une reconstitution stylisée, sans données véritables.</p>
+        <div class="proj-meta">
+          <span><b>Rôle</b> · Évolution CRM → ERP</span>
+          <span><b>Stack</b> · React</span>
+          <span><b>Statut</b> · En production</span>
+        </div>
+      </div>
+      <div class="proj-visual">
+        <div class="mock">
+          <div class="mock-bar"><span></span><span></span><span></span></div>
+          <div class="mock-body">
+            <div class="mock-row w60"></div>
+            <div class="mock-row w40"></div>
+            <div class="mock-chart">
+              <div style="height:35%"></div><div style="height:60%"></div><div style="height:45%"></div>
+              <div style="height:80%"></div><div style="height:55%"></div><div style="height:70%"></div>
+            </div>
+            <div class="mock-cards"><div></div><div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Gna Assurance -->
+    <div class="proj">
+      <div class="proj-body">
+        <div class="proj-tagrow">
+          <span class="badge badge-conf">CONFIDENTIEL — STAGE</span>
+        </div>
+        <h3>CRM interne — Gna Assurance</h3>
+        <p>Stage rémunéré durant lequel j'ai travaillé en équipe sur le CRM interne de l'entreprise, avec un vrai workflow Git collaboratif (branches, revues, merges). Une première expérience concrète de développement en équipe sur un produit déjà utilisé par de vrais utilisateurs internes.</p>
+        <div class="proj-meta">
+          <span><b>Rôle</b> · Développeur, travail en équipe sur Git</span>
+          <span><b>Stack</b> · Angular</span>
+          <span><b>Contexte</b> · Stage rémunéré</span>
+        </div>
+      </div>
+      <div class="proj-visual">
+        <div class="mock">
+          <div class="mock-bar"><span></span><span></span><span></span></div>
+          <div class="mock-body">
+            <div class="mock-row w80"></div>
+            <div class="mock-row w60"></div>
+            <div class="mock-row w40"></div>
+            <div class="mock-cards" style="margin-top:14px;"><div></div><div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Football SaaS -->
+    <div class="proj">
+      <div class="proj-body">
+        <div class="proj-tagrow">
+          <span class="badge badge-academic">PROJET ACADÉMIQUE</span>
+        </div>
+        <h3>Application SaaS — Gestion d'équipes de football</h3>
+        <p>Application web full-stack en architecture WAMP avec base de données SQL Server, pour gérer plus de 200 profils de joueurs, suivre les statistiques individuelles et collectives, et planifier les matchs. L'automatisation des tâches administratives a réduit de 40% le temps consacré à la gestion des équipes.</p>
+        <div class="proj-meta">
+          <span><b>Stack</b> · WAMP, SQL Server</span>
+          <span><b>Résultat</b> · −40% de temps de gestion</span>
+        </div>
+      </div>
+      <div class="proj-visual">
+        <div class="mock">
+          <div class="mock-bar"><span></span><span></span><span></span></div>
+          <div class="mock-body">
+            <div class="mock-cards"><div></div><div></div><div></div><div></div></div>
+            <div class="mock-row w60" style="margin-top:14px;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Big data predictive -->
+    <div class="proj">
+      <div class="proj-body">
+        <div class="proj-tagrow">
+          <span class="badge badge-academic">PROJET ACADÉMIQUE</span>
+        </div>
+        <h3>Analyse prédictive Big Data — Jupyter Notebook</h3>
+        <p>Analyse d'un jeu de données de plus de 500 000 lignes avec une méthodologie complète : nettoyage, analyse exploratoire (EDA), modélisation statistique et visualisation. Cinq tendances clés dégagées et huit visualisations interactives créées.</p>
+        <div class="proj-meta">
+          <span><b>Stack</b> · Python, Jupyter Notebook</span>
+          <span><b>Résultat</b> · 5 tendances, 8 visualisations</span>
+        </div>
+      </div>
+      <div class="proj-visual">
+        <div class="mock">
+          <div class="mock-bar"><span></span><span></span><span></span></div>
+          <div class="mock-body">
+            <div class="mock-chart">
+              <div style="height:20%"></div><div style="height:50%"></div><div style="height:75%"></div>
+              <div style="height:40%"></div><div style="height:90%"></div><div style="height:60%"></div><div style="height:30%"></div>
+            </div>
+            <div class="mock-row w40"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">// PARCOURS</span>
+      <h2>Formation &amp; expérience</h2>
+    </div>
+    <div class="timeline">
+      <div class="t-item">
+        <span class="t-date">2024 — 2025</span>
+        <h3>Licence 3 — Big Data, IoT &amp; Cloud Computing</h3>
+        <p>School of Business, TGMaster University.</p>
+      </div>
+      <div class="t-item">
+        <span class="t-date">STAGE RÉMUNÉRÉ</span>
+        <h3>Développeur — Gna Assurance</h3>
+        <p>Travail en équipe sur le CRM interne de l'entreprise avec un workflow Git collaboratif complet.</p>
+      </div>
+      <div class="t-item">
+        <span class="t-date">2020 — 2024</span>
+        <h3>Licence 1 &amp; 2 — Digital Management</h3>
+        <p>School of Business, TGMaster University.</p>
+      </div>
+      <div class="t-item">
+        <span class="t-date">2019 — 2020</span>
+        <h3>Baccalauréat Série D</h3>
+        <p>Lycée International Descartes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num">// CERTIFICATIONS</span>
+      <h2>Formations complémentaires</h2>
+      <p>Toutes suivies sur SKILLEOS.</p>
+    </div>
+    <div class="cert-grid">
+      <div class="cert"><div class="cert-icon">SQL</div><div><span>Apprendre SQL Server</span></div></div>
+      <div class="cert"><div class="cert-icon">SEC</div><div><span>Sécurité et Hacking</span></div></div>
+      <div class="cert"><div class="cert-icon">DB</div><div><span>Bases de données Firebase pour Unity</span></div></div>
+      <div class="cert"><div class="cert-icon">PY</div><div><span>Programmation Python : Les Fondamentaux</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <span class="section-num" style="justify-content:center; display:flex;">// CONTACT</span>
+    <h2>Un profil. Toutes les connexions.<br>Discutons du vôtre.</h2>
+    <p>Disponible pour un stage en développement front-end à partir de maintenant. Basé à Bingerville, Côte d'Ivoire.</p>
+    <div class="contact-row">
+      <a class="btn btn-primary" href="mailto:daoudafranck702@gmail.com">✉ daoudafranck702@gmail.com</a>
+      <a class="btn btn-ghost" href="tel:+2250749488800">+225 07 49 48 88 00</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/franckemmanuel" target="_blank">LinkedIn</a>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Franck Emmanuel Daouda Bleoue</span>
+      <span>Abidjan, Côte d'Ivoire</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV - Franck Emmanuel Daouda Bleoue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff;
+    --surface:#f8f9fa;
+    --line:#e9ecef;
+    --amber:#F2B705;
+    --teal:#4FD1C5;
+    --text:#212529;
+    --muted:#6c757d;
+    --muted-2:#495057;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+    max-width:210mm;
+    margin:0 auto;
+    padding:20mm;
+  }
+  h1,h2,h3{font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:var(--teal); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  
+  /* Header */
+  .cv-header{
+    border-bottom:2px solid var(--amber);
+    padding-bottom:20px;
+    margin-bottom:30px;
+  }
+  .cv-header h1{
+    font-size:2.2rem;
+    color:var(--text);
+    margin-bottom:8px;
+  }
+  .cv-header .title{
+    font-family:'JetBrains Mono';
+    font-size:1rem;
+    color:var(--muted);
+    margin-bottom:15px;
+  }
+  .cv-header .contact{
+    font-family:'JetBrains Mono';
+    font-size:0.85rem;
+    color:var(--muted-2);
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+  }
+  .cv-header .contact span{
+    display:flex;
+    align-items:center;
+    gap:5px;
+  }
+  
+  /* Section */
+  .section{
+    margin-bottom:30px;
+  }
+  .section-title{
+    font-family:'JetBrains Mono';
+    font-size:0.9rem;
+    color:var(--amber);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:15px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--line);
+  }
+  .section h2{
+    font-size:1.3rem;
+    margin-bottom:15px;
+    color:var(--text);
+  }
+  
+  /* Profile */
+  .profile-text{
+    color:var(--muted);
+    font-size:0.95rem;
+    line-height:1.6;
+  }
+  .profile-text strong{
+    color:var(--text);
+    font-weight:600;
+  }
+  
+  /* Skills */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  .skill-category h3{
+    font-size:1rem;
+    margin-bottom:10px;
+    color:var(--text);
+  }
+  .skill-tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .skill-tag{
+    font-family:'JetBrains Mono';
+    font-size:0.75rem;
+    padding:4px 10px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:4px;
+    color:var(--muted-2);
+  }
+  
+  /* Experience */
+  .exp-item{
+    margin-bottom:20px;
+    padding-left:15px;
+    border-left:2px solid var(--line);
+  }
+  .exp-item:last-child{
+    margin-bottom:0;
+  }
+  .exp-date{
+    font-family:'JetBrains Mono';
+    font-size:0.8rem;
+    color:var(--teal);
+    margin-bottom:5px;
+  }
+  .exp-item h3{
+    font-size:1.05rem;
+    margin-bottom:5px;
+    color:var(--text);
+  }
+  .exp-item p{
+    color:var(--muted);
+    font-size:0.9rem;
+    line-height:1.5;
+  }
+  
+  /* Projects */
+  .proj-item{
+    margin-bottom:15px;
+    padding:12px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:6px;
+  }
+  .proj-item h3{
+    font-size:1rem;
+    margin-bottom:5px;
+    color:var(--text);
+  }
+  .proj-item p{
+    color:var(--muted);
+    font-size:0.85rem;
+    line-height:1.4;
+    margin-bottom:8px;
+  }
+  .proj-meta{
+    font-family:'JetBrains Mono';
+    font-size:0.75rem;
+    color:var(--muted-2);
+  }
+  
+  /* Certifications */
+  .cert-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:6px;
+    margin-bottom:10px;
+  }
+  .cert-icon{
+    width:30px;
+    height:30px;
+    border-radius:6px;
+    background:var(--amber);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-family:'JetBrains Mono';
+    font-size:0.7rem;
+    font-weight:600;
+  }
+  .cert-text{
+    font-size:0.9rem;
+    color:var(--text);
+  }
+  
+  /* Print styles */
+  @media print{
+    body{
+      padding:0;
+      margin:0;
+      max-width:none;
+    }
+    .section{
+      page-break-inside:avoid;
+      margin-bottom:20px;
+    }
+    .cv-header{
+      page-break-after:avoid;
+    }
+    .proj-item{
+      page-break-inside:avoid;
+    }
+    .cert-item{
+      page-break-inside:avoid;
+    }
+    @page{
+      margin:15mm;
+    }
+  }
+  
+  @media (max-width:768px){
+    body{
+      padding:15mm;
+    }
+    .skills-grid{
+      grid-template-columns:1fr;
+    }
+  }
+  
+  /* Print button */
+  .print-btn{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:var(--amber);
+    color:#161200;
+    border:none;
+    padding:12px 24px;
+    border-radius:8px;
+    font-family:'JetBrains Mono';
+    font-size:0.85rem;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    transition:transform 0.2s, box-shadow 0.2s;
+    z-index:1000;
+  }
+  .print-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 16px rgba(0,0,0,0.2);
+  }
+  
+  @media print{
+    .print-btn{
+      display:none;
+    }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨 Télécharger en PDF</button>
+
+<div class="cv-header">
+  <h1>Franck Emmanuel Daouda Bleoue</h1>
+  <div class="title">Développeur Front-End & Data · Licence Informatique Option Génie Logiciel</div>
+  <div class="contact">
+    <span>📧 daoudafranck702@gmail.com</span>
+    <span>📞 +225 07 49 48 88 00</span>
+    <span>🔗 linkedin.com/in/franckemmanuel</span>
+    <span>📍 Abidjan, Côte d'Ivoire</span>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">// PROFIL</div>
+  <div class="profile-text">
+    <p>Étudiant en <strong>Licence Informatique option Génie Logiciel</strong> à TGMaster University (Abidjan), avec une spécialisation en développement logiciel, architecture et gestion de projets. Double compétence front-end et data : je construis des interfaces qui rendent la donnée lisible et l'IA utile.</p>
+    <p style="margin-top:10px;">Appétence particulière pour l'<strong>IA appliquée</strong>, l'<strong>optimisation</strong> et les architectures cloud. Expérience en développement d'équipe avec workflow Git collaboratif complet.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">// COMPÉTENCES</div>
+  <div class="skills-grid">
+    <div class="skill-category">
+      <h3>Front-end & Produit</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">React</span>
+        <span class="skill-tag">Angular</span>
+        <span class="skill-tag">WordPress</span>
+        <span class="skill-tag">UI Responsive</span>
+        <span class="skill-tag">Git & GitHub</span>
+        <span class="skill-tag">Firebase</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>Data & IA</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">Jupyter Notebook</span>
+        <span class="skill-tag">EDA</span>
+        <span class="skill-tag">Modélisation statistique</span>
+        <span class="skill-tag">Visualisation de données</span>
+        <span class="skill-tag">IA appliquée</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>Cloud & Infrastructure</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">SQL Server</span>
+        <span class="skill-tag">Architecture WAMP</span>
+        <span class="skill-tag">Java</span>
+        <span class="skill-tag">C</span>
+        <span class="skill-tag">Sécurité de base</span>
+        <span class="skill-tag">Cloud Computing</span>
+      </div>
+    </div>
+    <div class="skill-category">
+      <h3>Soft Skills</h3>
+      <div class="skill-tags">
+        <span class="skill-tag">Git collaboratif</span>
+        <span class="skill-tag">Communication</span>
+        <span class="skill-tag">Esprit d'équipe</span>
+        <span class="skill-tag">Apprentissage rapide</span>
+        <span class="skill-tag">Résolution de problèmes</span>
+        <span class="skill-tag">Autonomie</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">// PARCOURS</div>
+  
+  <div class="exp-item">
+    <div class="exp-date">2024 — 2025</div>
+    <h3>Licence Informatique — Option Génie Logiciel</h3>
+    <p>School of Business, TGMaster University. Spécialisation en développement logiciel, architecture et gestion de projets.</p>
+  </div>
+  
+  <div class="exp-item">
+    <div class="exp-date">STAGE RÉMUNÉRÉ</div>
+    <h3>Développeur — Gna Assurance</h3>
+    <p>Travail en équipe sur le CRM interne de l'entreprise avec un workflow Git collaboratif complet (branches, revues, merges).</p>
+  </div>
+  
+  <div class="exp-item">
+    <div class="exp-date">2020 — 2024</div>
+    <h3>Licence 1 & 2 — Digital Management</h3>
+    <p>School of Business, TGMaster University.</p>
+  </div>
+  
+  <div class="exp-item">
+    <div class="exp-date">2019 — 2020</div>
+    <h3>Baccalauréat Série D</h3>
+    <p>Lycée International Descartes.</p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">// PROJETS</div>
+  
+  <div class="proj-item">
+    <h3>Blackhand ConnectWord</h3>
+    <p>Application NFC centralisant tous les liens d'une personne, accessible en un tap NFC ou via un lien. Produit personnel en ligne.</p>
+    <div class="proj-meta">React, Firebase, WordPress · blackhand-connectword67.web.app</div>
+  </div>
+  
+  <div class="proj-item">
+    <h3>ERP Baanaa</h3>
+    <p>Système ERP en production, évolution d'un CRM vers une gestion complète de l'activité. Projet confidentiel.</p>
+    <div class="proj-meta">React · En production</div>
+  </div>
+  
+  <div class="proj-item">
+    <h3>CRM Gna Assurance</h3>
+    <p>Développement en équipe sur le CRM interne de l'entreprise avec workflow Git collaboratif.</p>
+    <div class="proj-meta">Angular · Stage rémunéré</div>
+  </div>
+  
+  <div class="proj-item">
+    <h3>Application SaaS Football</h3>
+    <p>Gestion d'équipes de football (200+ profils). Automatisation des tâches administratives : −40% de temps de gestion.</p>
+    <div class="proj-meta">WAMP, SQL Server</div>
+  </div>
+  
+  <div class="proj-item">
+    <h3>Analyse Prédictive Big Data</h3>
+    <p>Analyse de 500K+ lignes : nettoyage, EDA, modélisation statistique, visualisation. 5 tendances, 8 visualisations.</p>
+    <div class="proj-meta">Python, Jupyter Notebook</div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title">// CERTIFICATIONS</div>
+  
+  <div class="cert-item">
+    <div class="cert-icon">SQL</div>
+    <div class="cert-text">Apprendre SQL Server</div>
+  </div>
+  
+  <div class="cert-item">
+    <div class="cert-icon">SEC</div>
+    <div class="cert-text">Sécurité et Hacking</div>
+  </div>
+  
+  <div class="cert-item">
+    <div class="cert-icon">DB</div>
+    <div class="cert-text">Bases de données Firebase pour Unity</div>
+  </div>
+  
+  <div class="cert-item">
+    <div class="cert-icon">PY</div>
+    <div class="cert-text">Programmation Python : Les Fondamentaux</div>
+  </div>
+</div>
+
+<script>
+  // Auto-print on load (optional - comment out if not desired)
+  // window.onload = function() { window.print(); };
+</script>
+
+</body>
+</html>
