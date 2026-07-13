@@ -264,6 +264,57 @@
   .cert span{font-size:.88rem;}
   .cert small{display:block; color:var(--muted-2); font-family:'JetBrains Mono'; font-size:.68rem; margin-top:2px;}
 
+  /* ---- screenshot gallery ---- */
+  .gallery-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-top:28px;}
+  @media (max-width:760px){ .gallery-grid{grid-template-columns:1fr;} }
+  .gallery-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    overflow:hidden; cursor:pointer; transition:transform .3s ease, box-shadow .3s ease;
+  }
+  .gallery-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 12px 32px -12px rgba(0,0,0,.5), 0 0 0 1px var(--amber-dim);
+  }
+  .gallery-thumb{
+    width:100%; aspect-ratio:16/10; object-fit:cover;
+    background:var(--surface-2);
+    border-bottom:1px solid var(--line);
+  }
+  .gallery-content{padding:18px 20px;}
+  .gallery-content h4{font-size:1rem; margin-bottom:8px; color:var(--text);}
+  .gallery-content p{font-size:.85rem; color:var(--muted); line-height:1.5; margin:0;}
+  .gallery-note{
+    font-size:.74rem; color:var(--muted-2); font-style:italic; text-align:center;
+    margin-top:24px; padding:12px 20px; background:var(--surface-2);
+    border-radius:8px; border:1px solid var(--line);
+  }
+
+  /* ---- lightbox ---- */
+  .lightbox{
+    position:fixed; inset:0; z-index:1000;
+    background:rgba(10,14,20,.95); backdrop-filter:blur(8px);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none; transition:opacity .3s ease;
+  }
+  .lightbox.active{opacity:1; pointer-events:auto;}
+  .lightbox-content{
+    max-width:90vw; max-height:90vh;
+    border-radius:12px; overflow:hidden;
+    box-shadow:0 40px 80px -20px rgba(0,0,0,.8);
+    transform:scale(.95); transition:transform .3s ease;
+  }
+  .lightbox.active .lightbox-content{transform:scale(1);}
+  .lightbox img{max-width:100%; max-height:90vh; display:block;}
+  .lightbox-close{
+    position:absolute; top:24px; right:24px;
+    width:44px; height:44px; border-radius:50%;
+    background:var(--surface); border:1px solid var(--line);
+    color:var(--text); font-size:1.5rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .2s, border-color .2s;
+  }
+  .lightbox-close:hover{background:var(--surface-2); border-color:var(--amber); color:var(--amber);}
+
   /* ---- footer / contact ---- */
   footer{padding:100px 0 60px; text-align:center;}
   footer h2{font-size:clamp(1.8rem,4vw,2.6rem); margin-bottom:20px;}
@@ -534,11 +585,46 @@
           <span class="badge badge-conf">CONFIDENTIEL — EN PRODUCTION</span>
         </div>
         <h3>ERP Baanaa (issu d'un CRM)</h3>
-        <p>Système ERP actuellement en production pour l'équipe Baanaa, conçu à partir d'un CRM que j'ai fait évoluer vers une gestion plus large de l'activité. Le projet étant en usage réel avec des données clients, je ne peux pas partager le code ni des captures réelles — la maquette ci-contre est une reconstitution stylisée, sans données véritables.</p>
+        <p>Système ERP actuellement en production pour l'équipe Baanaa, conçu à partir d'un CRM que j'ai fait évoluer vers une gestion plus large de l'activité. Découvrez les principales fonctionnalités à travers les captures d'écran ci-dessous.</p>
         <div class="proj-meta">
           <span><b>Rôle</b> · Évolution CRM → ERP</span>
           <span><b>Stack</b> · React</span>
           <span><b>Statut</b> · En production</span>
+        </div>
+        
+        <div class="gallery-grid">
+          <div class="gallery-card" onclick="openLightbox('assets/Capture 1 — Gestion commerciale.jpg')">
+            <img src="assets/Capture 1 — Gestion commerciale.jpg" alt="Gestion commerciale" class="gallery-thumb">
+            <div class="gallery-content">
+              <h4>Gestion commerciale & Boutique</h4>
+              <p>Interface dédiée à la gestion des devis, commandes et ventes. Elle permet de suivre le pipeline commercial, consulter les indicateurs clés (devis actifs, valeur en cours, taux de conversion) et gérer les opérations commerciales depuis une seule interface.</p>
+            </div>
+          </div>
+          <div class="gallery-card" onclick="openLightbox('assets/Capture 2 — Gestion des fournisseurs.jpg')">
+            <img src="assets/Capture 2 — Gestion des fournisseurs.jpg" alt="Gestion des fournisseurs" class="gallery-thumb">
+            <div class="gallery-content">
+              <h4>Gestion des fournisseurs</h4>
+              <p>Module ERP permettant d'administrer les fournisseurs, suivre les avances, les crédits, le solde des comptes et gérer les informations administratives de chaque partenaire.</p>
+            </div>
+          </div>
+          <div class="gallery-card" onclick="openLightbox('assets/Capture 3 — Gestion de la facturation.jpg')">
+            <img src="assets/Capture 3 — Gestion de la facturation.jpg" alt="Facturation" class="gallery-thumb">
+            <div class="gallery-content">
+              <h4>Facturation & Suivi des paiements</h4>
+              <p>Module complet de gestion des factures avec suivi des statuts (brouillon, envoyée, impayée, annulée), échéances, montants, paiements et différentes actions de gestion.</p>
+            </div>
+          </div>
+          <div class="gallery-card" onclick="openLightbox('assets/Capture 4 — Gestion de la relation client (CRM).jpg')">
+            <img src="assets/Capture 4 — Gestion de la relation client (CRM).jpg" alt="CRM" class="gallery-thumb">
+            <div class="gallery-content">
+              <h4>CRM & Analyse de la clientèle</h4>
+              <p>Vue analytique des clients avec segmentation, statistiques, fréquence d'achat, chiffre d'affaires généré et suivi du comportement client afin d'améliorer les performances commerciales.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="gallery-note">
+          Projet en production. Les captures présentées proviennent de l'application utilisée par l'entreprise Baanaa. Certaines informations ont été volontairement masquées afin de préserver la confidentialité des données clients et des informations commerciales.
         </div>
       </div>
       <div class="proj-visual">
@@ -674,13 +760,17 @@
     <div class="section-head">
       <span class="section-num">// CERTIFICATIONS</span>
       <h2>Formations complémentaires</h2>
-      <p>Toutes suivies sur SKILLEOS.</p>
+      <p>Plus de 50 certifications suivies sur SKILLEOS — voici une sélection des plus pertinentes.</p>
     </div>
     <div class="cert-grid">
-      <div class="cert"><div class="cert-icon">SQL</div><div><span>Apprendre SQL Server</span></div></div>
-      <div class="cert"><div class="cert-icon">SEC</div><div><span>Sécurité et Hacking</span></div></div>
-      <div class="cert"><div class="cert-icon">DB</div><div><span>Bases de données Firebase pour Unity</span></div></div>
-      <div class="cert"><div class="cert-icon">PY</div><div><span>Programmation Python : Les Fondamentaux</span></div></div>
+      <div class="cert"><div class="cert-icon">D3</div><div><span>D3.js — Visualisation de données</span><small>SKILLEOS</small></div></div>
+      <div class="cert"><div class="cert-icon">O365</div><div><span>Office 365 — Administration avancée 1 & 2</span><small>SKILLEOS</small></div></div>
+      <div class="cert"><div class="cert-icon">SQL</div><div><span>SQL Server — Corruption & détection</span><small>SKILLEOS</small></div></div>
+      <div class="cert"><div class="cert-icon">SEC</div><div><span>Sauvegarder ses données numériques</span><small>SKILLEOS</small></div></div>
+      <div class="cert"><div class="cert-icon">OLAP</div><div><span>MO OLAP — Analyse multidimensionnelle</span><small>SKILLEOS</small></div></div>
+      <div class="cert"><div class="cert-icon">PY</div><div><span>Programmation Python : Les Fondamentaux</span><small>SKILLEOS</small></div></div>
+      <div class="cert"><div class="cert-icon">DB</div><div><span>Bases de données Firebase pour Unity</span><small>SKILLEOS</small></div></div>
+      <div class="cert"><div class="cert-icon">SEC</div><div><span>Sécurité et Hacking</span><small>SKILLEOS</small></div></div>
     </div>
   </div>
 </section>
@@ -702,7 +792,37 @@
   </div>
 </footer>
 
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <div class="lightbox-content" onclick="event.stopPropagation()">
+    <img id="lightbox-img" src="" alt="">
+  </div>
+</div>
+
 <script>
+  // Lightbox functions
+  function openLightbox(imageSrc) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightboxImg.src = imageSrc;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close lightbox on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeLightbox();
+    }
+  });
+
   // Scroll reveal animations
   const observerOptions = {
     threshold: 0.1,
